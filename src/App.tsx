@@ -1,13 +1,18 @@
-import React from 'react';
-import Pages from './pages/Pages';
-
+import React from "react";
+import Pages from "./pages/Pages";
+import Category from "./components/Category";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Cuisine from "./pages/Cuisine";
+import Search from "./components/Search";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello</h1>
+    <BrowserRouter>
+      <Search />
+      <Category />
       <Pages />
-    </div>
+    </BrowserRouter>
   );
 }
 
