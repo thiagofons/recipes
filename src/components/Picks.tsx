@@ -4,26 +4,30 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
 
-const Veggie = () => {
-  const [veggie, setVeggie] = useState<any>([]);
+type PicksProps = {
+  type: string;
+}
+
+const Picks = (props: PicksProps) => {
+  const [picks, setPicks] = useState<any>([]);
 
   useEffect(() => {
-    getVeggie();
+    getPicks();
   }, []);
 
-  const getVeggie = async () => {
-    const check = localStorage.getItem("veggie");
+  const getPicks = async () => {
+    const check = localStorage.getItem(props.type);
 
     if (check) {
-      setVeggie(JSON.parse(check));
+      setPicks(JSON.parse(check));
     } else {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=vegetarian`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=${props.type}`
       );
       const data = await response.json();
 
-      localStorage.setItem("veggie", JSON.stringify(data.recipes));
-      setVeggie(data.recipes);
+      localStorage.setItem(props.type, JSON.stringify(data.recipes));
+      setPicks(data.recipes);
 
       console.log(response);
     }
@@ -32,7 +36,7 @@ const Veggie = () => {
   return (
     <Padding>
       <Wrapper>
-        <h3>Our Vegeterian Picks</h3>
+        <h3>Our <span className="capitalized">{props.type}</span> Picks</h3>
 
         <Splide
           options={{
@@ -41,9 +45,10 @@ const Veggie = () => {
             pagination: false,
             drag: "free",
             gap: "5rem",
+            autoWidth: true
           }}
         >
-          {veggie.map((recipe: any) => (
+          {picks.map((recipe: any) => (
             <SplideSlide key={recipe.id}>
               <Card>
                 <Link to={"/recipe/" + recipe.id}>
@@ -74,6 +79,10 @@ const Wrapper = styled.div`
   h3 {
     margin-top: 0;
     margin-bottom: 2rem;
+
+    .capitalized {
+      text-transform: capitalize;
+    }
   }
 `;
 
@@ -117,4 +126,4 @@ const Gradient = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
 `;
 
-export default Veggie;
+export default Picks;

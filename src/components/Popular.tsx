@@ -30,7 +30,7 @@ const Popular = () => {
   };
 
   return (
-    <div>
+    <Padding>
       <Wrapper>
         <h3>Popular Picks</h3>
 
@@ -56,12 +56,25 @@ const Popular = () => {
           ))}
         </Splide>
       </Wrapper>
-    </div>
+    </Padding>
   );
 };
 
+const Padding = styled.div`
+  padding: 1rem;
+  margin-bottom: 4rem;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    padding: 1rem 4rem;
+  }
+`;
+
 const Wrapper = styled.div`
-  margin: 4rem 0rem;
+  h3 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
 `;
 
 const Card = styled.div`
