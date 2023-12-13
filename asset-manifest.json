@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/recipes/static/css/main.021440f9.css",
+    "main.js": "/recipes/static/js/main.f10e6ffc.js",
+    "static/media/banner.jpg": "/recipes/static/media/banner.7830f39710da9c9ff7b4.jpg",
+    "static/media/logo.svg": "/recipes/static/media/logo.b8ff82440a4062ce7f91c1a4f756dd79.svg",
+    "index.html": "/recipes/index.html",
+    "main.021440f9.css.map": "/recipes/static/css/main.021440f9.css.map",
+    "main.f10e6ffc.js.map": "/recipes/static/js/main.f10e6ffc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.021440f9.css",
+    "static/js/main.f10e6ffc.js"
+  ]
+}
