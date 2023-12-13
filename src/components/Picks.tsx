@@ -22,7 +22,7 @@ const Picks = (props: PicksProps) => {
       setPicks(JSON.parse(check));
     } else {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=${props.type}`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9`
       );
       const data = await response.json();
 
@@ -32,6 +32,7 @@ const Picks = (props: PicksProps) => {
       console.log(response);
     }
   };
+  
 
   return (
     <Padding>
@@ -48,17 +49,21 @@ const Picks = (props: PicksProps) => {
             autoWidth: true
           }}
         >
-          {picks.map((recipe: any) => (
-            <SplideSlide key={recipe.id}>
-              <Card>
-                <Link to={"/recipe/" + recipe.id}>
-                  <p>{recipe.title}</p>
-                  <img src={recipe.image} alt={recipe.title} />
-                  <Gradient />
-                </Link>
-              </Card>
-            </SplideSlide>
-          ))}
+          {picks.map((recipe: any) => {
+            console.log(recipe);
+            
+            return(
+              <SplideSlide key={recipe.id}>
+                <Card>
+                  <Link to={"/recipe/" + recipe.id}>
+                    <p>{recipe.title}</p>
+                    <img src={recipe.image} alt={recipe.title} />
+                    <Gradient />
+                  </Link>
+                </Card>
+              </SplideSlide>
+            )
+          } )}
         </Splide>
       </Wrapper>
     </Padding>

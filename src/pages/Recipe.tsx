@@ -22,10 +22,15 @@ const Recipe = () => {
 
   return (
     <DetailWrapper>
-      <header>
+      <Header>
         <h2>{details.title}</h2>
         <img src={details.image} alt="" />
-      </header>
+        <p
+          dangerouslySetInnerHTML={{ __html: details.summary }}
+          className="about"
+        ></p>
+      </Header>
+
       <Info>
         <Buttons>
           <Button
@@ -44,16 +49,20 @@ const Recipe = () => {
 
         {activeTab === "instructions" && (
           <Instructions>
-            <p dangerouslySetInnerHTML={{ __html: details.summary }} className="about"></p>
-            <p dangerouslySetInnerHTML={{ __html: details.instructions }} className="recipe"></p>
+            <p
+              dangerouslySetInnerHTML={{ __html: details.instructions }}
+              className="recipe"
+            ></p>
           </Instructions>
         )}
         {activeTab === "ingredients" && (
-          <ul>
-            {details.extendedIngredients.map((ingredient: any) => (
-              <li key={ingredient.id}>{ingredient.original}</li>
-            ))}
-          </ul>
+          <Ingredients>
+            <ul>
+              {details.extendedIngredients.map((ingredient: any) => (
+                <li key={ingredient.id}>{ingredient.original}</li>
+              ))}
+            </ul>
+          </Ingredients>
         )}
       </Info>
     </DetailWrapper>
@@ -61,19 +70,15 @@ const Recipe = () => {
 };
 
 const DetailWrapper = styled.div`
-  padding: 1rem;
+  padding: 1rem 5vw;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  header {
-    color: #2c2b2b;
-    h2 {
-      margin-bottom: 1rem;
-    }
-    img {
-      width: 100%;
-    }
+  @media screen and (min-width: 1024px) {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .active {
@@ -89,13 +94,36 @@ const DetailWrapper = styled.div`
     margin-top: 2rem;
   }
 `;
+
+const Header = styled.header`
+  color: #2c2b2b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+  img,
+  p {
+    max-width: 30rem;
+  }
+  img {
+    width: 100%;
+  }
+  p {
+    margin: 2rem 0;
+    line-height: 1.5rem;
+  }
+`;
+
 const Buttons = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   gap: 1rem;
   align-items: center;
-
-`
+`;
 const Button = styled.button`
   width: 10rem;
   padding: 1rem 2rem;
@@ -103,20 +131,35 @@ const Button = styled.button`
   border-radius: 3rem;
   background: white;
   border: none;
-  margin-right: 2rem;
   font-weight: 600;
+
+  @media screen and (min-width: 1024px) {
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background: #bdbcbc;
+    }
+  }
 `;
 
-const Info = styled.div`
-  
-`;
+const Info = styled.div``;
 
 const Instructions = styled.div`
-  margin: 1rem 0;
+  margin: 2rem 0;
 
+  .about {
+    margin-bottom: 2rem;
+    line-height: 1.25rem;
+  }
   .recipe {
     padding: 0 1.5rem;
   }
-`
+`;
+
+const Ingredients = styled.div`
+  padding: 0 2rem;
+  color: #2c2b2b;
+`;
 
 export default Recipe;

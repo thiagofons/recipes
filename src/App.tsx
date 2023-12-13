@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { GiKnifeFork } from "react-icons/gi";
 import NavBar from "./components/NavBar";
 import BannerImg from "./assets/banner.jpg";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -18,12 +19,15 @@ const App = () => {
         <Banner>
           <img src={BannerImg} alt="" />
           <Gradient />
-          <h2>Test</h2>
+          <h2>The best recipes you find here</h2>
         </Banner>
 
         <Category />
         <Pages />
+        
       </Main>
+      <Footer />
+      
     </BrowserRouter>
   );
 };

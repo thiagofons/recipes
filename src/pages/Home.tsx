@@ -1,4 +1,3 @@
-import Veggie from "../components/Veggie";
 import Popular from "../components/Popular";
 import { motion } from "framer-motion";
 import Picks from "../components/Picks";
@@ -12,10 +11,9 @@ const Home = () => {
       transition={{ duration: 0.5 }}
     >
       <Popular />
+      
       <Picks type="vegetarian" />
       <Picks type="dessert" />
-      
-      
     </motion.div>
   );
 };
